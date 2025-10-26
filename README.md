@@ -23,7 +23,7 @@
     <a href="https://rpm.snu.ac.kr/"><strong>Robust Perception and Mobile Robotics Lab (RPM)</strong></a>
   </p>
 
-  <h3 align="center"><a href="https://arxiv.org/abs/2502.07703">Paper</a> | <a href="https://youtu.be/zeH3RQdIviw?si=aZg_WZfn4ErqkNu8">Video</a></h3>
+  <h3 align="center"><a href="https://arxiv.org/abs/2502.07703">Arxiv</a> | <a href="https://ieeexplore.ieee.org/document/11128334">Paper</a> | <a href="https://youtu.be/zeH3RQdIviw?si=aZg_WZfn4ErqkNu8">Video</a></h3>
   <div align="center"></div>
 </p>
 
