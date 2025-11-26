@@ -51,7 +51,6 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   pcl_ros
   tf
-  livox_ros_driver
   visualization_msgs
 )
 

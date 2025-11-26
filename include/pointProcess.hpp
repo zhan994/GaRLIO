@@ -31,8 +31,8 @@ using std::cos;
 using std::sin;
 
 enum TIME_UNIT {SEC = 0, MS = 1, US = 2, NS = 3};
-enum LID_TYPE {AVIA, HEASI};
-enum RAR_TYPE {OCULII_1, OCULII_2};
+enum LID_TYPE {AVIA, HEASI, ROBOSENSE};
+enum RAR_TYPE {OCULII_1, OCULII_2, MINDCRUISE};
 enum Feature {Nor, Poss_Plane, Real_Plane, Edge_Jump, Edge_Plane, Wire, ZeroPoint};
 enum Surround {Prev, Next};
 enum E_jump {Nr_nor, Nr_zero, Nr_180, Nr_inf, Nr_blind};
@@ -117,6 +117,26 @@ POINT_CLOUD_REGISTER_POINT_STRUCT(ouster_ros::Point,
     (std::uint32_t, range, range)
 )
 
+// clang-format on
+namespace robosense {
+struct EIGEN_ALIGN16 Point {
+  PCL_ADD_POINT4D;
+  float intensity;
+  std::uint16_t ring = 0;
+  double timestamp = 0;
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+};
+} // namespace robosense
+  // clang-format off
+POINT_CLOUD_REGISTER_POINT_STRUCT(robosense::Point,
+    (float, x, x)
+    (float, y, y)
+    (float, z, z)
+    (float, intensity, intensity)
+    (std::uint16_t, ring, ring)
+    (double, timestamp, timestamp)
+)
+
 bool isValid(double x);
 
 class PointProcess {
@@ -142,8 +162,10 @@ public:
 private:
     void radar_handler1(const sensor_msgs::PointCloud::ConstPtr& msg);
     void radar_handler2(const sensor_msgs::PointCloud2::ConstPtr &msg);
+    void radar_handler3(const sensor_msgs::PointCloud2::ConstPtr &msg);
     void avia_handler(const livox_ros_driver::CustomMsg::ConstPtr &msg);
     void hesai_handler(const sensor_msgs::PointCloud2::ConstPtr &msg);
+    void robosense_handler(const sensor_msgs::PointCloud2::ConstPtr &msg);
     void give_feature(pcl::PointCloud<PointType> &pl, std::vector<orgtype> &types, pcl::PointCloud<PointType> &pl_surf,
                       pcl::PointCloud<PointType> &pl_corn);
     void pub_func(pcl::PointCloud<PointType> &pl, ros::Publisher pub, const ros::Time &ct);
@@ -155,6 +177,7 @@ private:
     static bool time_list_ouster(ouster_ros::Point &point_1, ouster_ros::Point &point_2) {return (point_1.t < point_2.t);}
     static bool time_list_hesai(hesai_ros::Point &point_1, hesai_ros::Point &point_2) {return (point_1.timestamp < point_2.timestamp);}
     static bool time_list_avia(PointType &point_1, PointType &point_2) {return (point_1.curvature < point_2.curvature);}
+    static bool time_list_robosense(robosense::Point &point_1, robosense::Point &point_2) {return (point_1.timestamp < point_2.timestamp);}
 
     
     int group_size;
@@ -192,6 +215,8 @@ private:
     double radius;
     int mean_k;
     int min_neighbors;
+
+    double head_time = 0.;
 };
 
 #endif
