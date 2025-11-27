@@ -37,7 +37,7 @@ preprocess:
 
 mapping:
     # loss_threshold: 1000
-    max_iteration: 4
+    max_iteration: 5
     cube_side_length: 1000.0
     filter_size_surf: 0.5           # in some scenes with intense motion, reduce this value, such as set 0.15
     filter_size_map: 0.5           # in some scenes with intense motion, reduce this value, such as set 0.3
