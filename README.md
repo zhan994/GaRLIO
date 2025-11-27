@@ -1,3 +1,19 @@
+## AgriLiRa4D Dataset
+
+Install prerequisites including `ROS>=Noetic`, `Eigen>=3.3.4`, `OpenCV` and `PCL>=1.8`.
+
+```
+cd ~/$A_ROS_DIR$/src
+git clone git@github.com:zhan994/GaRLIO.git
+cd GaRLIO
+git checkout agrilira4d
+cd ../..
+catkin_make
+source devel/setup.bash
+
+roslaunch garlio agrilira4d_mapping.launch
+```
+
 <p align="center">
 
   <h1 align="center"> 🌏 GaRLIO: Gravity enhanced Radar-LiDAR-Inertial Odometry [ICRA 2025]</h1>
