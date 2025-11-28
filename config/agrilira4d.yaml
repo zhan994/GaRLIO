@@ -10,8 +10,8 @@ threshold:
     power_threshold: 0
     distance_near_thresh : 2
     distance_far_thresh : 100
-    z_low_thresh : -100
-    z_high_thresh : 100
+    z_low_thresh : -30
+    z_high_thresh : 30
     downsample_method : "VOXELGRID"   #VOXELGRID or APPROX_VOXELGRID or NONE
     downsample_resolution : 0.1
     outlier_removal_method : "RADIUS" #"STATISTICAL" or "RADIUS" or "NONE"
@@ -21,9 +21,9 @@ threshold:
     radius_min_neighbors : 1
 
 cov :
-    LASER_POINT_COV : 0.005
-    VELOCITY_COV : 0.01 
-    GRAVITY_COV : 0.01    
+    LASER_POINT_COV : 0.0001
+    VELOCITY_COV : 0.5 
+    GRAVITY_COV : 0.05    
 
     
 preprocess:

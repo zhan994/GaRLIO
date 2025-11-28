@@ -30,33 +30,33 @@ namespace rio
 struct RadarEgoVelocityEstimatorConfig
 {
  float min_dist = 1;
- float max_dist = 400;
- float min_db = 10;
+ float max_dist = 100;
+ float min_db = 3;
  float elevation_thresh_deg = 22.5;
  float azimuth_thresh_deg = 56.5;
  float doppler_velocity_correction_factor = 1;
  
- float thresh_zero_velocity = 0.05; //Below this is recognized as inlier (m/s)
+ float thresh_zero_velocity = 0.1; //Below this is recognized as inlier (m/s)
  float allowed_outlier_percentage = 0.30;
- float sigma_zero_velocity_x = 1.0e-03; // default Standard Deviation
- float sigma_zero_velocity_y = 3.2e-03;
- float sigma_zero_velocity_z = 1.0e-02;
+ float sigma_zero_velocity_x = 0.025; // default Standard Deviation
+ float sigma_zero_velocity_y = 0.025;
+ float sigma_zero_velocity_z = 0.025;
  
  float sigma_offset_radar_x = 0;
  float sigma_offset_radar_y = 0;
  float sigma_offset_radar_z = 0;
 
- float max_sigma_x = 0.2;
- float max_sigma_y = 0.2;
- float max_sigma_z = 0.2;
+ float max_sigma_x = 0.15;
+ float max_sigma_y = 0.3;
+ float max_sigma_z = 0.3;
  float max_r_cond;
  bool use_cholesky_instead_of_bdcsvd = true;
 
  bool use_ransac = true;
- float outlier_prob = 0.05; // Outlier Probability, to calculate ransac_iter_
- float success_prob = 0.995;
- float N_ransac_points = 5;
- float inlier_thresh = 0.5; // err(j) threshold, 0.1 too small, 1.0 too large
+ float outlier_prob = 0.4; // Outlier Probability, to calculate ransac_iter_
+ float success_prob = 0.9999;
+ float N_ransac_points = 3;
+ float inlier_thresh = 0.15; // err(j) threshold, 0.1 too small, 1.0 too large
 };
 
 struct RadarEgoVelocityEstimatorIndices
