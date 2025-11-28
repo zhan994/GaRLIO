@@ -1592,7 +1592,7 @@ int main(int argc, char **argv)
 			propagate_state = lio_state;
 			lid_pos = propagate_state.rot_end * propagate_state.pos_ex_i2l + propagate_state.pos_end;
 			
-			if (featsUndistort == NULL){
+			if (featsUndistort->empty() || featsUndistort == NULL) {
 				ROS_WARN("No point, skip this scan!");
 				continue;
 			}
