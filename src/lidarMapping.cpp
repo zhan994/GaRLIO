@@ -1691,7 +1691,8 @@ int main(int argc, char **argv) {
       sensor_msgs::PointCloud2 inlier_radar_msg, outlier_radar_msg;
       estimator.estimate(pc2_raw_msg, v_r, sigma_v_r, inlier_radar_msg,
                          outlier_radar_msg);
-      std::cout << "Estimated radar velocity: " << v_r.transpose() << std::endl;
+      std::cout << "Sync. Estimated radar velocity: " << v_r.transpose()
+                << std::endl;
 
       last_rot = lio_state.rot_end;
       if (is_first_scan) {
@@ -1763,7 +1764,7 @@ int main(int argc, char **argv) {
       lid_pos = propagate_state.rot_end * propagate_state.pos_ex_i2l +
                 propagate_state.pos_end;
 
-      if (featsUndistort == NULL) {
+      if (featsUndistort->empty() || featsUndistort == NULL) {
         ROS_WARN("No point, skip this scan!");
         continue;
       }

@@ -431,7 +431,7 @@ void PointProcess::radar_handler3(
     }
   }
 
-   //********** Publish PointCloud2 Format Raw Cloud **********
+  //********** Publish PointCloud2 Format Raw Cloud **********
   sensor_msgs::PointCloud2 pc2_raw_msg;
   pcl::toROSMsg(*radarcloud_raw, pc2_raw_msg);
 
@@ -692,6 +692,11 @@ void PointProcess::robosense_handler(
   head_time = pl_orig.points[0].timestamp;
 
   for (int i = 0; i < plsize; i++) {
+    if (!(std::isfinite(pl_orig.points[i].x) &&
+          std::isfinite(pl_orig.points[i].y) &&
+          std::isfinite(pl_orig.points[i].z)))
+      continue;
+
     PointType added_pt;
     // cout<<"!!!!!!"<<i<<" "<<plsize<<endl;
 
