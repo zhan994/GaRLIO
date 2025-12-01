@@ -107,6 +107,8 @@ pcl::PointCloud<PointType>::Ptr
 pcl::PointCloud<PointType>::Ptr featsFromMap(new pcl::PointCloud<PointType>());
 pcl::PointCloud<PointType>::Ptr featsArray(new pcl::PointCloud<PointType>());
 pcl::PointCloud<PointType>::Ptr map_save(new pcl::PointCloud<PointType>());
+pcl::PointCloud<pcl::PointXYZ>::Ptr
+    radar_map_save(new pcl::PointCloud<pcl::PointXYZ>());
 
 std::unique_ptr<message_filters::Subscriber<sensor_msgs::PointCloud2>>
     lidar_sub;
@@ -2007,6 +2009,10 @@ int main(int argc, char **argv) {
         Measures.radar_prev.pop_back();
       Measures.radar_prev.push_front(radar_save);
 
+      if (pcd_save_en) {
+        *radar_map_save += *radar_save;
+      }
+
       /*** add the feature points to map kdtree ***/
       map_incremental();
       t1 = omp_get_wtime();
@@ -2034,7 +2040,8 @@ int main(int argc, char **argv) {
     std::string all_points_dir(string(string(ROOT_DIR) + "PCD/") + file_name);
     pcl::PCDWriter pcd_writer;
     std::cout << "map point save to" << all_points_dir << std::endl;
-    pcd_writer.writeBinary(all_points_dir, *map_save);
+    // pcd_writer.writeBinary(all_points_dir, *map_save);
+    pcd_writer.writeBinaryCompressed(all_points_dir, *radar_map_save);
   }
 
   return 0;
