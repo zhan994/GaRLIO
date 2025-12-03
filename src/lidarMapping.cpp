@@ -128,7 +128,7 @@ std::condition_variable sigBuf;
 
 pcl::VoxelGrid<PointType> downSizeFilterSurf;
 ros::Publisher pubLaserCloudMap, pubLaserCloudFullRes, pubOdomAftMapped,
-    pubLaserAfterMappedPath;
+    pubLaserAfterMappedPath, pubRadarCloudFullRes;
 ros::Publisher marker_pub, gravity_pub;
 Eigen::Vector3d gravity_cal;
 
@@ -1671,6 +1671,8 @@ int main(int argc, char **argv) {
       nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_map", 100);
   pubLaserCloudFullRes =
       nh.advertise<sensor_msgs::PointCloud2>("/laser_cloud_registered", 100);
+  pubRadarCloudFullRes =
+      nh.advertise<sensor_msgs::PointCloud2>("/radar_cloud_registered", 100);
   pubOdomAftMapped =
       nh.advertise<nav_msgs::Odometry>("/aft_mapped_to_init", 10);
   pubLaserAfterMappedPath =
@@ -2004,6 +2006,13 @@ int main(int argc, char **argv) {
       radar_save->width = Measures.radar->width;
       radar_save->height = Measures.radar->height;
       radar_save->is_dense = Measures.radar->is_dense;
+
+      // pub radar registered point cloud
+      sensor_msgs::PointCloud2 radarCloudMsg;
+      pcl::toROSMsg(*radar_save, radarCloudMsg);
+      radarCloudMsg.header.stamp = ros::Time().fromSec(lidar_end_time);
+      radarCloudMsg.header.frame_id = "camera_init";
+      pubRadarCloudFullRes.publish(radarCloudMsg);
 
       if (Measures.radar_prev.size() > 2)
         Measures.radar_prev.pop_back();
