@@ -7,16 +7,12 @@ Panels:
         - /Global Options1
         - /Grid1
         - /mapping1
-        - /mapping1/surround1
-        - /mapping1/currPoints1
         - /mapping1/currPoints1/Autocompute Value Bounds1
-        - /mapping1/currRadar1
-        - /mapping1/Odometry1
+        - /mapping1/surroundRadar1
+        - /mapping1/currRadarPoints1
         - /mapping1/Odometry1/Shape1
         - /mapping1/Odometry1/Covariance1
-        - /mapping1/mappingPath1
         - /MarkerArray1/Namespaces1
-        - /PointCloud21
       Splitter Ratio: 0.6432291865348816
     Tree Height: 1137
   - Class: rviz/Selection
@@ -36,7 +32,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: currRadar
+    SyncSource: currRadarPoints
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -151,8 +147,36 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 2.853255271911621
-            Min Value: -2.9590513706207275
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: surroundRadar
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /radar_cloud_registered
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 0.699999988079071
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 2.343557596206665
+            Min Value: 0.0782710462808609
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -164,11 +188,11 @@ Visualization Manager:
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Min Color: 0; 0; 0
-          Name: currRadar
+          Name: currRadarPoints
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 3
+          Size (Pixels): 2
           Size (m): 0.009999999776482582
           Style: Points
           Topic: /radar_cloud_registered
@@ -200,8 +224,8 @@ Visualization Manager:
           Queue Size: 10
           Shape:
             Alpha: 1
-            Axes Length: 3
-            Axes Radius: 1
+            Axes Length: 2
+            Axes Radius: 0.5
             Color: 255; 25; 0
             Head Length: 0.30000001192092896
             Head Radius: 0.10000000149011612
@@ -310,7 +334,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 128.03689575195312
+      Distance: 27.678197860717773
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -318,17 +342,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 1.34871506690979
-        Y: 87.80352020263672
-        Z: 58.623924255371094
+        X: -7.578304767608643
+        Y: 40.33000946044922
+        Z: 23.485122680664062
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.2669990062713623
+      Pitch: 0.571998655796051
       Target Frame: <Fixed Frame>
-      Yaw: 3.586568832397461
+      Yaw: 1.263432264328003
     Saved: ~
 Window Geometry:
   Displays:
@@ -347,4 +371,4 @@ Window Geometry:
     collapsed: false
   Width: 2496
   X: 64
-  Y: 178
+  Y: 398
